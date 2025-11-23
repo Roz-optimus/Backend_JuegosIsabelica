@@ -1,4 +1,3 @@
-import { unique } from 'next/dist/build/utils'
 import {Table, Column, Model, DataType,Default,Unique, AllowNull, BeforeCreate, BeforeUpdate} from 'sequelize-typescript'
 
 @Table({
