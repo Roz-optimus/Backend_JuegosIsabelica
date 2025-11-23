@@ -1,8 +1,21 @@
+import app from './server'
 import colors from 'colors'
-import server from './server'
+import { connectDB } from './server'
 
-const port = process.env.PORT || 4000
+const PORT = process.env.PORT || 4000
 
-server.listen(port, () => {
-    console.log( colors.cyan.bold( `REST API en el puerto ${port}`))
-})
+const startServer = async () => {
+    try {
+        await connectDB()
+        
+        app.listen(PORT, () => {
+            console.log(colors.green.bold(`🚀 Servidor corriendo en puerto ${PORT}`))
+            console.log(colors.cyan(`Ambiente: ${process.env.NODE_ENV || 'development'}`))
+        })
+    } catch (error) {
+        console.error(colors.red.bold('❌ Error iniciando servidor:'), error)
+        process.exit(1)
+    }
+}
+
+startServer()
